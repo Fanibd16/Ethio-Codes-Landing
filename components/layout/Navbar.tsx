@@ -50,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ toggleTheme, isDarkMode, onNavClick, on
               key={link.name} 
               href={link.href} 
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-sm font-light uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-colors"
             >
               {link.name}
             </a>

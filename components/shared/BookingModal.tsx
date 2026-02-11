@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../ui/button';
 import { cn } from '../../lib/utils';
+import { Lead } from '../../lib/types';
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmit?: (lead: Omit<Lead, 'id' | 'status' | 'date'>) => void;
 }
 
-const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
+const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, onSubmit }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -43,8 +45,15 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    
+    // Callback to parent to save lead
+    if (onSubmit) {
+      onSubmit(formData);
+    }
+
     setIsSubmitting(false);
     setIsSuccess(true);
   };

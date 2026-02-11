@@ -1,8 +1,12 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import SectionHeader from '../shared/SectionHeader';
-import { TESTIMONIALS } from '../../lib/constants';
+import { Testimonial } from '../../lib/types';
 import { cn } from '../../lib/utils';
+
+interface TestimonialsProps {
+  testimonials: Testimonial[];
+}
 
 const StarRating = () => (
   <div className="flex gap-1 mb-6">
@@ -14,7 +18,7 @@ const StarRating = () => (
   </div>
 );
 
-const TestimonialCard = ({ testimonial, isActive }: { testimonial: typeof TESTIMONIALS[0], isActive: boolean }) => (
+const TestimonialCard = ({ testimonial, isActive }: { testimonial: Testimonial, isActive: boolean }) => (
   <div className={cn(
     "relative w-[300px] md:w-[400px] shrink-0 p-8 rounded-2xl bg-card border border-border/40 shadow-xl shadow-black/5 dark:shadow-white/5 flex flex-col items-start text-left h-full transition-all duration-500 ease-out select-none",
     isActive 
@@ -36,7 +40,7 @@ const TestimonialCard = ({ testimonial, isActive }: { testimonial: typeof TESTIM
   </div>
 );
 
-const Testimonials: React.FC = () => {
+const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -72,14 +76,14 @@ const Testimonials: React.FC = () => {
   }, []);
 
   const next = useCallback(() => {
-    const nextIndex = (activeIndex + 1) % TESTIMONIALS.length;
+    const nextIndex = (activeIndex + 1) % testimonials.length;
     scrollToIndex(nextIndex);
-  }, [activeIndex, scrollToIndex]);
+  }, [activeIndex, scrollToIndex, testimonials.length]);
 
   const prev = useCallback(() => {
-    const prevIndex = (activeIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+    const prevIndex = (activeIndex - 1 + testimonials.length) % testimonials.length;
     scrollToIndex(prevIndex);
-  }, [activeIndex, scrollToIndex]);
+  }, [activeIndex, scrollToIndex, testimonials.length]);
 
   // Auto-play effect
   useEffect(() => {
@@ -139,7 +143,7 @@ const Testimonials: React.FC = () => {
             className="flex flex-row flex-nowrap overflow-x-auto gap-8 pb-12 no-scrollbar scroll-smooth snap-x snap-mandatory items-center relative px-[calc(50%-150px)] md:px-[calc(50%-200px)]"
             onScroll={handleScrollSync}
           >
-             {TESTIMONIALS.map((t, idx) => (
+             {testimonials.map((t, idx) => (
                <div key={idx} className="snap-center shrink-0 transition-all duration-500">
                  <TestimonialCard testimonial={t} isActive={idx === activeIndex} />
                </div>
@@ -166,7 +170,7 @@ const Testimonials: React.FC = () => {
 
             {/* Pagination Indicators */}
             <div className="flex gap-2">
-               {TESTIMONIALS.map((_, i) => (
+               {testimonials.map((_, i) => (
                  <button 
                    key={i} 
                    onClick={() => scrollToIndex(i)}

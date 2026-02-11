@@ -2,7 +2,11 @@
 import React from 'react';
 import { APP_NAME } from '../../lib/constants';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onAdminClick?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
   return (
     <footer className="py-24 border-t border-foreground/5 bg-background dark:bg-black transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-8">
@@ -56,6 +60,11 @@ const Footer: React.FC = () => {
           <div className="flex items-center gap-8">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
+            {onAdminClick && (
+              <button onClick={onAdminClick} className="hover:text-primary transition-colors opacity-50 hover:opacity-100">
+                Admin
+              </button>
+            )}
           </div>
         </div>
       </div>

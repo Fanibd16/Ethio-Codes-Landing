@@ -207,48 +207,18 @@ export const FEATURES = [
 
 export const PRICING_PLANS = [
   {
-    name: "System Foundation",
-    price: "Custom",
-    description: "Perfect for high-growth startups and local businesses.",
-    features: [
-      "Discovery & System Architecture",
-      "Custom Web Platform",
-      "Primary Mobile App (Android/iOS)",
-      "Essential Admin Dashboard",
-      "99.9% Uptime Hosting Setup"
-    ],
-    cta: "Request System Audit",
-    popular: false
+    name: "Project-based Development",
+    description: "Streamline your projects with minimal risk, ensuring top-notch quality and timely, on-budget delivery.",
+    cta: "Get in Touch",
+    icon: "cube",
+    color: "orange"
   },
   {
-    name: "Enterprise Core",
-    price: "Custom",
-    description: "Designed for mid-to-large organizations and NGOs.",
-    features: [
-      "Everything in Foundation",
-      "Full API Integration Suite",
-      "Automated Workflow Engine",
-      "Internal Dashboard & Analytics",
-      "Dedicated Project Manager",
-      "Team Training & Documentation"
-    ],
-    cta: "Schedule Strategy Call",
-    popular: true
-  },
-  {
-    name: "Institutional Grade",
-    price: "Custom",
-    description: "For Government portals and mass-market systems.",
-    features: [
-      "Multi-Year Scalability Planning",
-      "Citizen/User ID & Payment Systems",
-      "Government-Grade Security Audit",
-      "High-Availability Infrastructure",
-      "Custom SLA & On-Site Training",
-      "24/7 Priority Engineering Support"
-    ],
-    cta: "Contact Govt Relations",
-    popular: false
+    name: "Dedicated Teams",
+    description: "Accelerate your projects with our expert team, combining technical prowess and management skills for seamless collaboration and success.",
+    cta: "Get in Touch",
+    icon: "network",
+    color: "primary"
   }
 ];
 

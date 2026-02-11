@@ -1,16 +1,17 @@
 
 import React from 'react';
 import SectionHeader from '../shared/SectionHeader';
-import { BLOG_POSTS } from '../../lib/constants';
+import { BlogPost } from '../../lib/types';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '../ui/card';
 import Badge from '../ui/badge';
 import Button from '../ui/button';
 
 interface BlogProps {
+  posts: BlogPost[];
   onPostSelect?: (slug: string) => void;
 }
 
-const Blog: React.FC<BlogProps> = ({ onPostSelect }) => {
+const Blog: React.FC<BlogProps> = ({ posts, onPostSelect }) => {
   return (
     <section id="blog" className="py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
@@ -23,7 +24,7 @@ const Blog: React.FC<BlogProps> = ({ onPostSelect }) => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {BLOG_POSTS.map((post, idx) => (
+            {posts.map((post, idx) => (
               <Card 
                 key={idx} 
                 className="group overflow-hidden flex flex-col h-full transition-all duration-500 hover:border-primary/30 hover:shadow-[0_30px_60px_-15px_rgba(34,197,94,0.15)] bg-background/40 glass border-white/[0.05] cursor-pointer"
@@ -55,7 +56,7 @@ const Blog: React.FC<BlogProps> = ({ onPostSelect }) => {
                 </CardHeader>
 
                 <CardContent className="flex-1 pb-8">
-                  <p className="text-muted-foreground font-light leading-relaxed">
+                  <p className="text-muted-foreground font-light leading-relaxed line-clamp-3">
                     {post.excerpt}
                   </p>
                 </CardContent>

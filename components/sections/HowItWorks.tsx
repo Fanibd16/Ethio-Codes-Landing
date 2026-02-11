@@ -15,6 +15,7 @@ interface StepProps {
 const TimelineStep: React.FC<StepProps> = ({ step, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const stepRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,6 +35,35 @@ const TimelineStep: React.FC<StepProps> = ({ step, index }) => {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Parallax Effect
+  useEffect(() => {
+    let requestRef: number;
+    
+    const updateParallax = () => {
+      if (!stepRef.current || !parallaxRef.current) return;
+      
+      const rect = stepRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate relative position from center of viewport
+      // Negative when above center, positive when below
+      const centerOffset = (rect.top + rect.height / 2) - (viewportHeight / 2);
+      
+      // Apply parallax factor (slower movement than scroll)
+      const parallaxY = centerOffset * 0.15;
+      
+      // Apply transform: preserve horizontal center (-50%) and add vertical parallax
+      parallaxRef.current.style.transform = `translate(-50%, ${parallaxY}px)`;
+      
+      requestRef = requestAnimationFrame(updateParallax);
+    };
+
+    // Start loop
+    requestRef = requestAnimationFrame(updateParallax);
+    
+    return () => cancelAnimationFrame(requestRef);
   }, []);
 
   const isEven = index % 2 === 0;
@@ -74,8 +104,12 @@ const TimelineStep: React.FC<StepProps> = ({ step, index }) => {
         </p>
       </div>
 
-      {/* Center Dot with Scale-up Animation */}
-      <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center z-10">
+      {/* Center Dot with Scale-up Animation & Parallax */}
+      <div 
+        ref={parallaxRef}
+        className="absolute left-1/2 hidden md:flex items-center justify-center z-10 will-change-transform"
+        style={{ transform: 'translate(-50%, 0px)' }}
+      >
         <div className={cn(
           "w-14 h-14 rounded-full border-2 border-primary/20 flex items-center justify-center transition-all duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1) backdrop-blur-md",
           isVisible 

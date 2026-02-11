@@ -1,16 +1,17 @@
 
 import React from 'react';
-import { BLOG_POSTS } from '../../lib/constants';
+import { BlogPost } from '../../lib/types';
 import Button from '../ui/button';
 import Badge from '../ui/badge';
 
 interface BlogPostDetailProps {
   slug: string;
+  posts: BlogPost[];
   onBack: () => void;
 }
 
-const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ slug, onBack }) => {
-  const post = BLOG_POSTS.find(p => p.slug === slug);
+const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ slug, posts, onBack }) => {
+  const post = posts.find(p => p.slug === slug);
 
   if (!post) {
     return (
@@ -79,18 +80,11 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ slug, onBack }) => {
               {post.excerpt}
             </p>
             <div className="space-y-8 text-lg text-muted-foreground font-light leading-relaxed">
-              {/* Splitting content into paragraphs for demonstration */}
-              {post.content.split('. ').map((para, i) => (
-                <p key={i}>{para}.</p>
-              ))}
-              
-              <h3 className="text-3xl font-bold text-foreground pt-8">The Path Forward</h3>
-              <p>
-                As we continue to iterate on these systems, our focus remains on long-term maintainability. 
-                We believe that the best systems are those that can be easily understood and updated by 
-                future generations of engineers. This is why we prioritize clean code and comprehensive 
-                documentation in every project we undertake.
-              </p>
+              {/* Splitting content into paragraphs for demonstration if it doesn't contain HTML */}
+              {post.content.includes('\n') ? 
+                 post.content.split('\n').map((para, i) => <p key={i}>{para}</p>) : 
+                 post.content.split('. ').map((para, i) => <p key={i}>{para}.</p>)
+              }
             </div>
           </div>
 

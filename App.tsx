@@ -16,12 +16,53 @@ import FAQ from './components/sections/FAQ';
 import GradientBackground from './components/shared/GradientBackground';
 import ScrollToTop from './components/shared/ScrollToTop';
 import BookingModal from './components/shared/BookingModal';
+import AdminDashboard from './components/admin/AdminDashboard';
+import { 
+  BLOG_POSTS as INITIAL_BLOG_POSTS, 
+  SERVICES as INITIAL_SERVICES, 
+  FEATURES as INITIAL_FEATURES,
+  PRICING_PLANS as INITIAL_PRICING,
+  TESTIMONIALS as INITIAL_TESTIMONIALS
+} from './lib/constants';
+import { BlogPost, Lead, Service, Feature, Testimonial, PricingPlan } from './lib/types';
 
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [currentView, setCurrentView] = useState<'home' | 'post' | 'services'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'post' | 'services' | 'admin'>('home');
   const [selectedPostSlug, setSelectedPostSlug] = useState<string | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
+  // Global State for Content
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
+  const [services, setServices] = useState<Service[]>(INITIAL_SERVICES);
+  const [features, setFeatures] = useState<Feature[]>(INITIAL_FEATURES);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(INITIAL_TESTIMONIALS);
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>(INITIAL_PRICING);
+
+  const [leads, setLeads] = useState<Lead[]>([
+    {
+      id: '1',
+      name: 'Abebe Bikila',
+      email: 'abebe@marathon.et',
+      phone: '+251 911 234 567',
+      website: 'www.ethiorun.com',
+      industry: 'startup',
+      issue: 'Need a scalable registration system for events.',
+      date: '2025-10-10T14:30',
+      status: 'New'
+    },
+    {
+      id: '2',
+      name: 'Sara Tadesse',
+      email: 'sara@fintech.et',
+      phone: '+251 922 987 654',
+      website: 'www.yenepay.com',
+      industry: 'fintech',
+      issue: 'Security audit required for new payment gateway.',
+      date: '2025-10-09T09:15',
+      status: 'Contacted'
+    }
+  ]);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -50,14 +91,20 @@ const App: React.FC = () => {
     setSelectedPostSlug(null);
     
     // Optional: scroll back to relevant section
-    setTimeout(() => {
-      const targetId = prevView === 'post' ? 'blog' : 'services';
-      const el = document.getElementById(targetId);
-      el?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+    if (prevView === 'post') {
+      setTimeout(() => {
+        document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   const handleNavigation = (href: string) => {
+    if (href === '/admin') {
+      setCurrentView('admin');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+
     // If not on home, go home first
     if (currentView !== 'home') {
       setCurrentView('home');
@@ -80,52 +127,87 @@ const App: React.FC = () => {
     }, delay);
   };
 
+  const handleLeadSubmit = (leadData: Omit<Lead, 'id' | 'status' | 'date'>) => {
+    const newLead: Lead = {
+      ...leadData,
+      id: Math.random().toString(36).substr(2, 9),
+      date: new Date().toISOString(),
+      status: 'New'
+    };
+    setLeads(prev => [newLead, ...prev]);
+  };
+
   return (
     <div className="relative min-h-screen overflow-x-hidden transition-colors duration-300">
       <GradientBackground />
-      <Navbar 
-        toggleTheme={toggleTheme} 
-        isDarkMode={isDarkMode} 
-        onNavClick={handleNavigation}
-        onBookAudit={() => setIsBookingModalOpen(true)}
-      />
       
-      <main>
-        {currentView === 'home' && (
-          <>
-            <Hero onNavClick={handleNavigation} onBookAudit={() => setIsBookingModalOpen(true)} />
-            <Features />
-            <Services onShowAll={handleServicesDetail} />
-            <HowItWorks />
-            <Testimonials />
-            <Pricing />
-            <CTA onBookAudit={() => setIsBookingModalOpen(true)} />
-            <Blog onPostSelect={handlePostSelect} />
-            <FAQ />
-          </>
-        )}
-        
-        {currentView === 'post' && (
-          <BlogPostDetail 
-            slug={selectedPostSlug!} 
-            onBack={handleBackToHome} 
+      {currentView === 'admin' ? (
+        <AdminDashboard 
+          leads={leads}
+          setLeads={setLeads}
+          blogPosts={blogPosts}
+          setBlogPosts={setBlogPosts}
+          services={services}
+          setServices={setServices}
+          features={features}
+          setFeatures={setFeatures}
+          testimonials={testimonials}
+          setTestimonials={setTestimonials}
+          pricingPlans={pricingPlans}
+          setPricingPlans={setPricingPlans}
+          onExit={() => setCurrentView('home')}
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
+        />
+      ) : (
+        <>
+          <Navbar 
+            toggleTheme={toggleTheme} 
+            isDarkMode={isDarkMode} 
+            onNavClick={handleNavigation}
+            onBookAudit={() => setIsBookingModalOpen(true)}
           />
-        )}
+          
+          <main>
+            {currentView === 'home' && (
+              <>
+                <Hero onNavClick={handleNavigation} onBookAudit={() => setIsBookingModalOpen(true)} />
+                <Features features={features} />
+                <Services services={services} onShowAll={handleServicesDetail} />
+                <HowItWorks />
+                <Testimonials testimonials={testimonials} />
+                <Pricing plans={pricingPlans} />
+                <CTA onBookAudit={() => setIsBookingModalOpen(true)} />
+                <Blog posts={blogPosts} onPostSelect={handlePostSelect} />
+                <FAQ />
+              </>
+            )}
+            
+            {currentView === 'post' && (
+              <BlogPostDetail 
+                slug={selectedPostSlug!} 
+                posts={blogPosts}
+                onBack={handleBackToHome} 
+              />
+            )}
 
-        {currentView === 'services' && (
-          <ServicesDetail 
-            onBack={handleBackToHome} 
+            {currentView === 'services' && (
+              <ServicesDetail 
+                onBack={handleBackToHome} 
+              />
+            )}
+          </main>
+
+          <Footer onAdminClick={() => handleNavigation('/admin')} />
+          <ScrollToTop />
+          
+          <BookingModal 
+            isOpen={isBookingModalOpen} 
+            onClose={() => setIsBookingModalOpen(false)} 
+            onSubmit={handleLeadSubmit}
           />
-        )}
-      </main>
-
-      <Footer />
-      <ScrollToTop />
-      
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={() => setIsBookingModalOpen(false)} 
-      />
+        </>
+      )}
     </div>
   );
 };

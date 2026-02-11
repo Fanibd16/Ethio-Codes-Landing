@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import Button from '../ui/button';
 import Badge from '../ui/badge';
 
-const TRUSTED_LOGOS = ["GOVT.ET", "NGO-WORLD", "FINTECH-X", "ETHIOTELE.COM", "WAYNE-ENT", "GLOBEX", "ACME.ET"];
+const TRUSTED_LOGOS = ["GOVT.ET", "NGO-WORLD", "FINTECH-X", "STARK-CORP", "WAYNE-ENT", "GLOBEX", "ACME.ET"];
 
 interface HeroProps {
   onNavClick?: (href: string) => void;
@@ -35,13 +35,9 @@ const Hero: React.FC<HeroProps> = ({ onNavClick, onBookAudit }) => {
     containerRef.current.style.setProperty('--mouse-py', `${clientY - top}px`);
   };
 
-  // const line1 = "Stop Building Apps.".split(' ');
-  // const line2Part1 = "Launch".split(' ');
-  // const line2Part2 = "End-to-End Systems.".split(' ');
-
   const line1 = "Stop Building Apps.".split(' ');
-  const line2Part1 = "Build".split(' ');
-  const line2Part2 = "Complete Digital Systems.".split(' ');
+  const line2Part1 = "Launch".split(' ');
+  const line2Part2 = "End-to-End Systems.".split(' ');
 
   return (
     <section 
@@ -93,12 +89,8 @@ const Hero: React.FC<HeroProps> = ({ onNavClick, onBookAudit }) => {
             </span>
           </h1>
           
-          {/* <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed opacity-0 animate-reveal font-light" style={{ animationDelay: '1.2s' }}>
-            We engineer mission-critical digital infrastructure for Government, Enterprise, and Growth-focused Startups. 
-            <span className="block mt-2 font-medium text-foreground/90">One vendor. One system. Zero headaches.</span>
-          </p> */}
           <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed opacity-0 animate-reveal font-light" style={{ animationDelay: '1.2s' }}>
-            We design, build, and launch scalable web, mobile, and enterprise systems — so your organization runs better, faster, and smarter.
+            We engineer mission-critical digital infrastructure for Government, Enterprise, and Growth-focused Startups. 
             <span className="block mt-2 font-medium text-foreground/90">One vendor. One system. Zero headaches.</span>
           </p>
           

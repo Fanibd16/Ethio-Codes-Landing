@@ -1,10 +1,14 @@
 
 import React from 'react';
 import SectionHeader from '../shared/SectionHeader';
-import { FEATURES } from '../../lib/constants';
+import { Feature } from '../../lib/types';
 import { cn } from '../../lib/utils';
 
-const Features: React.FC = () => {
+interface FeaturesProps {
+  features: Feature[];
+}
+
+const Features: React.FC<FeaturesProps> = ({ features }) => {
   return (
     <section id="system" className="py-32 relative">
       <div className="container mx-auto px-4 md:px-8">
@@ -24,7 +28,7 @@ const Features: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-collapse overflow-hidden rounded-3xl border border-white/[0.05]">
-            {FEATURES.map((feature, idx) => (
+            {features.map((feature, idx) => (
               <div 
                 key={idx} 
                 className={cn(
