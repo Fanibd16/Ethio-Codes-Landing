@@ -20,7 +20,11 @@ export interface Lead {
   industry: string;
   issue: string;
   date: string;
-  status: 'New' | 'Contacted' | 'Closed';
+  status: 'New' | 'Contacted' | 'Closed' | 'Client' | 'VIP';
+  tags?: string[];
+  totalSpend?: number;
+  lastVisit?: string;
+  notes?: string;
 }
 
 export interface Service {
@@ -31,6 +35,8 @@ export interface Service {
   features: string[];
   icon: string;
   category: string;
+  price?: number;
+  duration?: number; // in minutes
 }
 
 export interface Feature {
@@ -53,4 +59,28 @@ export interface PricingPlan {
   cta: string;
   icon: string;
   color: string;
+}
+
+export interface Booking {
+  id: string;
+  clientName: string;
+  clientEmail: string;
+  serviceId: string;
+  serviceName: string;
+  date: string;
+  time: string;
+  status: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled';
+  amount: number;
+  staffId?: string;
+}
+
+export interface Staff {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  email: string;
+  phone: string;
+  status: 'Active' | 'On Leave' | 'Inactive';
+  performance: number;
 }
