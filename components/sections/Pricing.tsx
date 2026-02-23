@@ -38,12 +38,21 @@ const Pricing: React.FC<PricingProps> = ({ plans }) => {
     <section id="pricing" className="py-24 relative">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <SectionHeader 
-            badge="Engagement Models"
-            title="Choose the engagement model that works for you"
-            align="center"
-            className="mb-16"
-          />
+          <div className="text-center mb-24 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs font-semibold text-primary mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Engagement Models
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Choose the <span className="text-primary">engagement model</span> that works for you
+            </h2>
+            <p className="text-muted-foreground text-xl font-light leading-relaxed">
+              Flexible partnership options designed to fit your specific needs and growth stage.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch mb-20">
             {plans.map((plan, idx) => {
@@ -65,7 +74,7 @@ const Pricing: React.FC<PricingProps> = ({ plans }) => {
                 <Card 
                   key={idx} 
                   className={cn(
-                    "flex flex-col relative p-10 md:p-12 transition-all duration-300 border border-white/10 bg-black/60 backdrop-blur-xl h-full group",
+                    "flex flex-col relative p-10 md:p-12 transition-all duration-300 border border-border bg-white/80 dark:bg-black/60 backdrop-blur-xl h-full group",
                     themeClasses.cardHover
                   )}
                 >
@@ -78,7 +87,7 @@ const Pricing: React.FC<PricingProps> = ({ plans }) => {
                     </div>
                   </div>
                   
-                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white tracking-tight">
+                  <h3 className="text-3xl md:text-4xl font-bold mb-6 text-foreground tracking-tight">
                     {plan.name}
                   </h3>
                   

@@ -16,12 +16,21 @@ const Blog: React.FC<BlogProps> = ({ posts, onPostSelect }) => {
     <section id="blog" className="py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader 
-            badge="Insights & Engineering"
-            title="Latest from the Lab"
-            description="Deep dives into system architecture, product strategy, and the future of digital infrastructure in East Africa."
-            align="left"
-          />
+          <div className="text-center mb-24 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs font-semibold text-primary mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </span>
+              Insights & Engineering
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Latest from the <span className="text-primary">Lab</span>
+            </h2>
+            <p className="text-muted-foreground text-xl font-light leading-relaxed">
+              Deep dives into system architecture, product strategy, and the future of digital infrastructure in East Africa.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post, idx) => (

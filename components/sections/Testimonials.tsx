@@ -126,11 +126,21 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonials }) => {
       <div className="container mx-auto px-4 md:px-8">
         
         {/* Header Section */}
-        <SectionHeader 
-          badge="Testimonial"
-          title="What Our Client Says"
-          description="Our business is one of close relationships and we are very fortunate to be able to share so many positive experiences with our clients."
-        />
+        <div className="text-center mb-24 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs font-semibold text-primary mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Testimonial
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            What Our <span className="text-primary">Client Says</span>
+          </h2>
+          <p className="text-muted-foreground text-xl font-light leading-relaxed">
+            Our business is one of close relationships and we are very fortunate to be able to share so many positive experiences with our clients.
+          </p>
+        </div>
 
         {/* Carousel Container */}
         <div 

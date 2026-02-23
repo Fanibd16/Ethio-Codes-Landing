@@ -166,11 +166,21 @@ const HowItWorks: React.FC = () => {
   return (
     <section id="how-it-works" className="py-32 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <SectionHeader 
-          badge="The Workflow"
-          title="From Concept to Deployment"
-          description="A meticulous engineering approach designed to deliver high-performance digital products with speed and precision."
-        />
+        <div className="text-center mb-24 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs font-semibold text-primary mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            The Workflow
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            From Concept to <span className="text-primary">Deployment</span>
+          </h2>
+          <p className="text-muted-foreground text-xl font-light leading-relaxed">
+            A meticulous engineering approach designed to deliver high-performance digital products with speed and precision.
+          </p>
+        </div>
 
         <div className="relative max-w-6xl mx-auto mt-24">
           {/* Vertical Center Line - Static base */}
@@ -183,6 +193,20 @@ const HowItWorks: React.FC = () => {
             {steps.map((step, idx) => (
               <TimelineStep key={idx} step={step} index={idx} />
             ))}
+          </div>
+
+          <div className="mt-32 flex justify-center">
+            <button className="group relative overflow-hidden rounded-full bg-[#FF0000] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,197,94,0.5)]">
+              <span className="absolute inset-0 w-full h-full bg-primary translate-x-[-100%] transition-transform duration-300 ease-out group-hover:translate-x-0"></span>
+              <div className="relative z-10 flex items-center gap-4">
+                <span className="text-lg font-bold tracking-wide">Get Started Today - Book Your Free Strategy Call</span>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white transition-transform duration-300 group-hover:translate-x-1">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
       </div>

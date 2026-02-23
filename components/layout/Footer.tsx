@@ -4,9 +4,11 @@ import { APP_NAME } from '../../lib/constants';
 
 interface FooterProps {
   onAdminClick?: () => void;
+  toggleTheme: () => void;
+  isDarkMode: boolean;
 }
 
-const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
+const Footer: React.FC<FooterProps> = ({ onAdminClick, toggleTheme, isDarkMode }) => {
   return (
     <footer className="py-24 border-t border-foreground/5 bg-background dark:bg-black transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-8">
@@ -58,6 +60,16 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
         <div className="pt-12 border-t border-foreground/5 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-muted-foreground font-light">
           <p>© 2026 {APP_NAME}. All rights reserved.</p>
           <div className="flex items-center gap-8">
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-medium">Eye Protection</span>
+              <button 
+                onClick={toggleTheme}
+                className={`w-11 h-6 rounded-full p-1 transition-colors duration-300 flex items-center ${isDarkMode ? 'bg-[#22c55e]' : 'bg-gray-300 dark:bg-gray-600'}`}
+                aria-label="Toggle Theme"
+              >
+                <div className={`w-4 h-4 rounded-full bg-white shadow-md transform transition-transform duration-300 ${isDarkMode ? 'translate-x-5' : 'translate-x-0'}`} />
+              </button>
+            </div>
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
             {onAdminClick && (

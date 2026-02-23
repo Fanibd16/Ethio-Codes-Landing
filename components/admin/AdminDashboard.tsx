@@ -228,7 +228,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
           </div>
           <span className={cn("ml-3 text-lg font-bold tracking-tight transition-opacity duration-300 whitespace-nowrap", isCollapsed ? "opacity-0 w-0 hidden" : "opacity-100")}>
-            EthioCodes<span className="text-primary">CRM</span>
+            NEXORA<span className="text-primary">CRM</span>
           </span>
         </div>
 
@@ -731,11 +731,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({
                    <div className="grid grid-cols-2 gap-6">
                       <div className="space-y-2">
                          <label className="text-xs font-bold uppercase text-gray-500">Business Name</label>
-                         <input type="text" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5" defaultValue="EthioCodes Systems" />
+                         <input type="text" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5" defaultValue="NEXORA Systems" />
                       </div>
                       <div className="space-y-2">
                          <label className="text-xs font-bold uppercase text-gray-500">Contact Email</label>
-                         <input type="email" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5" defaultValue="admin@ethiocodes.com" />
+                         <input type="email" className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5" defaultValue="admin@nexora.com" />
                       </div>
                    </div>
                    

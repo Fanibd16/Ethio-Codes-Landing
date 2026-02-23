@@ -177,7 +177,7 @@ export const FEATURES = [
     title: "Mission-Critical Scaling",
     description: "Systems designed to grow with your user base. From 100 to 1,000,000+ citizens or customers without breaking a sweat.",
     icon: "zap",
-    highlighted: true
+    highlighted: false
   },
   {
     title: "Enterprise Automation",

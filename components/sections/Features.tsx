@@ -21,21 +21,23 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
               </span>
               The EthioCodes Difference
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Software is fragile. Systems are robust.</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Why Our Systems <span className="text-primary">Deliver Results</span> Others Can't
+            </h2>
             <p className="text-muted-foreground text-xl font-light leading-relaxed">
-              Most agencies deliver code that breaks under pressure. We build self-healing, automated digital ecosystems that serve as the backbone of your business or institution.
+              Discover why leading enterprises and institutions choose our proven system for building robust digital infrastructure that scales without the typical failure points.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-collapse overflow-hidden rounded-3xl border border-white/[0.05]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-collapse overflow-hidden rounded-3xl border border-black/[0.05] dark:border-white/[0.05]">
             {features.map((feature, idx) => (
               <div 
                 key={idx} 
                 className={cn(
-                  "p-12 transition-all duration-300 border border-white/[0.03]",
+                  "p-12 transition-all duration-300 border border-black/[0.03] dark:border-white/[0.03]",
                   feature.highlighted 
                     ? "bg-primary text-black z-10 shadow-2xl shadow-primary/20" 
-                    : "bg-transparent hover:bg-white/[0.02]"
+                    : "bg-transparent hover:bg-black/[0.02] dark:hover:bg-white/[0.02]"
                 )}
               >
                 <div className={cn(
@@ -46,7 +48,7 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
                 </div>
                 <h3 className={cn(
                   "text-2xl font-bold mb-4",
-                  feature.highlighted ? "text-black" : "text-white"
+                  feature.highlighted ? "text-black" : "text-foreground"
                 )}>
                   {feature.title}
                 </h3>
@@ -67,11 +69,11 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
                    Ethio-Global Standards
                 </div>
                 <div className="flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-foreground/20"></div>
                    Bank-Grade Security
                 </div>
                 <div className="flex items-center gap-2">
-                   <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+                   <div className="w-1.5 h-1.5 rounded-full bg-foreground/20"></div>
                    Unmatched Scalability
                 </div>
              </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import SectionHeader from '../shared/SectionHeader';
 import { Service } from '../../lib/types';
 import Button from '../ui/button';
+import { cn } from '../../lib/utils';
 
 interface ServicesProps {
   services: Service[];
@@ -29,54 +30,81 @@ const Services: React.FC<ServicesProps> = ({ services, onShowAll }) => {
   return (
     <section id="services" className="py-32 relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <SectionHeader 
-          badge="Our Capabilities"
-          title="World-Class Engineering Services"
-          description="We provide the full spectrum of digital transformation services, from deep system architecture to high-fidelity product design."
-        />
+        <div className="text-center mb-24 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1 text-xs font-semibold text-primary mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Our Capabilities
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            What We <span className="text-primary">Offer</span>
+          </h2>
+          <p className="text-muted-foreground text-xl font-light leading-relaxed">
+            We provide the full spectrum of digital transformation services, from deep system architecture to high-fidelity product design.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {displayServices.map((service, idx) => (
-            <div 
-              key={service.id} 
-              className="group relative p-10 rounded-[2.5rem] bg-white/[0.02] dark:bg-white/[0.01] border border-black/[0.05] dark:border-white/[0.05] hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col"
-            >
-              {/* Hover Glow */}
-              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              
-              <div className="w-14 h-14 text-primary mb-8 group-hover:scale-110 transition-transform duration-500">
-                <ServiceIcon name={service.icon} />
-              </div>
-              
-              <h3 className="text-2xl font-bold mb-4 text-foreground leading-tight">
-                {service.title}
-              </h3>
-              
-              <p className="text-muted-foreground font-light leading-relaxed mb-8 flex-1">
-                {service.shortDesc}
-              </p>
-              
-              <ul className="space-y-3 mb-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                {service.features.slice(0, 3).map((feat, fidx) => (
-                  <li key={fidx} className="text-xs font-medium uppercase tracking-widest text-primary/60 flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-primary" />
-                    {feat}
-                  </li>
-                ))}
-              </ul>
-              
-              <Button 
-                variant="ghost" 
-                className="group/btn px-0 hover:bg-transparent text-primary font-bold flex items-center gap-2"
-                onClick={onShowAll}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto auto-rows-fr">
+          {displayServices.map((service, idx) => {
+            // Bento Grid Logic:
+            // Row 1: Wide (2) + Narrow (1)
+            // Row 2: Narrow (1) + Wide (2)
+            // Row 3: Wide (2) + Narrow (1)
+            const isWide = idx === 0 || idx === 3 || idx === 4;
+            const spanClass = isWide ? "md:col-span-2" : "md:col-span-1";
+            const isRightAligned = service.id === 'devops-cloud';
+
+            return (
+              <div 
+                key={service.id} 
+                className={cn(
+                  "group relative p-10 rounded-[2.5rem] bg-white/[0.02] dark:bg-white/[0.01] border border-black/[0.05] dark:border-white/[0.05] hover:border-primary/50 transition-all duration-500 overflow-hidden flex flex-col h-full",
+                  spanClass,
+                  isRightAligned ? "items-end text-right" : "items-start text-left"
+                )}
               >
-                Learn More
-                <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Button>
-            </div>
-          ))}
+                {/* Hover Glow */}
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                
+                <div className="w-14 h-14 text-primary mb-8 group-hover:scale-110 transition-transform duration-500">
+                  <ServiceIcon name={service.icon} />
+                </div>
+                
+                <h3 className="text-2xl font-bold mb-4 text-foreground leading-tight">
+                  {service.title}
+                </h3>
+                
+                <p className="text-muted-foreground font-light leading-relaxed mb-8 flex-1">
+                  {service.shortDesc}
+                </p>
+                
+                <ul className="space-y-3 mb-10">
+                  {service.features.slice(0, 3).map((feat, fidx) => (
+                    <li key={fidx} className={cn(
+                      "text-xs font-medium uppercase tracking-widest text-primary/60 flex items-center gap-2",
+                      isRightAligned ? "flex-row-reverse" : "flex-row"
+                    )}>
+                      <span className="w-1 h-1 rounded-full bg-primary" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+                
+                <Button 
+                  variant="ghost" 
+                  className="group/btn px-0 hover:bg-transparent text-primary font-bold flex items-center gap-2"
+                  onClick={onShowAll}
+                >
+                  Learn More
+                  <svg className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Button>
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-20 flex flex-col items-center gap-6">

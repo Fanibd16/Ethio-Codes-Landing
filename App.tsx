@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
+import Challenges from './components/sections/Challenges';
 import Features from './components/sections/Features';
+import WhoWeAre from './components/sections/WhoWeAre';
 import HowItWorks from './components/sections/HowItWorks';
 import Pricing from './components/sections/Pricing';
 import Testimonials from './components/sections/Testimonials';
@@ -27,7 +29,7 @@ import {
 import { BlogPost, Lead, Service, Feature, Testimonial, PricingPlan } from './lib/types';
 
 const App: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'post' | 'services' | 'admin'>('home');
   const [selectedPostSlug, setSelectedPostSlug] = useState<string | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -162,8 +164,6 @@ const App: React.FC = () => {
       ) : (
         <>
           <Navbar 
-            toggleTheme={toggleTheme} 
-            isDarkMode={isDarkMode} 
             onNavClick={handleNavigation}
             onBookAudit={() => setIsBookingModalOpen(true)}
           />
@@ -172,7 +172,9 @@ const App: React.FC = () => {
             {currentView === 'home' && (
               <>
                 <Hero onNavClick={handleNavigation} onBookAudit={() => setIsBookingModalOpen(true)} />
+                <Challenges />
                 <Features features={features} />
+                <WhoWeAre />
                 <Services services={services} onShowAll={handleServicesDetail} />
                 <HowItWorks />
                 <Testimonials testimonials={testimonials} />
@@ -198,7 +200,11 @@ const App: React.FC = () => {
             )}
           </main>
 
-          <Footer onAdminClick={() => handleNavigation('/admin')} />
+          <Footer 
+            onAdminClick={() => handleNavigation('/admin')} 
+            toggleTheme={toggleTheme}
+            isDarkMode={isDarkMode}
+          />
           <ScrollToTop />
           
           <BookingModal 
