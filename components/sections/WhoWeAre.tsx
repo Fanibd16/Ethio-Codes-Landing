@@ -1,11 +1,56 @@
-
 import React from 'react';
-import SectionHeader from '../shared/SectionHeader';
-import { cn } from '../../lib/utils';
+
+const PRINCIPLES = [
+  {
+    title: 'Architecture First',
+    description:
+      'We map your business flows before we write code, so every feature strengthens the whole system.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.8}
+          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: 'Execution Discipline',
+    description:
+      'From sprint planning to production hardening, we ship with measurable milestones and zero guesswork.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.8}
+          d="M9 12l2 2 4-4m5-2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+    ),
+  },
+  {
+    title: 'Long-Term Ownership',
+    description:
+      'We stay close after launch, improving performance, reliability, and security as your business scales.',
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1.8}
+          d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-14 0h14"
+        />
+      </svg>
+    ),
+  },
+];
 
 const WhoWeAre: React.FC = () => {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section id="about" className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20 max-w-3xl mx-auto">
@@ -17,37 +62,62 @@ const WhoWeAre: React.FC = () => {
               Who We Are
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Not Just Another Agency. <br/><span className="text-primary">We Are System Architects.</span>
+              Not Just Another Agency. <br />
+              <span className="text-primary">We Are System Architects.</span>
             </h2>
+            <p className="text-base md:text-lg text-muted-foreground font-light">
+              We design and operate digital systems that make institutions faster, safer, and easier to scale.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-6 text-lg text-muted-foreground font-light leading-relaxed">
                 <p>
-                  At <span className="font-bold text-foreground">EthioCodes</span>, we believe that software is more than just code—it's the nervous system of your organization.
+                  At <span className="font-bold text-foreground">EthioCodes</span>, software is never "just an app". It
+                  is the operating layer behind revenue, service delivery, and decision-making.
                 </p>
                 <p>
-                  Born from a need to bridge the gap between rapid innovation and institutional reliability, we have assembled a team of elite engineers, designers, and strategists dedicated to one mission: <span className="text-foreground font-medium">Building digital infrastructure that lasts.</span>
+                  We built this company to close the gap between rapid innovation and institutional reliability. Our
+                  team of engineers, designers, and strategists shares one mission:
+                  <span className="text-foreground font-medium"> build infrastructure that lasts.</span>
                 </p>
                 <p>
-                  We don't just patch problems. We diagnose root causes, architect scalable solutions, and implement systems that grow stronger as your business expands.
+                  We do not patch symptoms. We diagnose root causes, redesign systems, and deliver solutions that
+                  become stronger as your organization grows.
                 </p>
+              </div>
+
+              <div className="space-y-3">
+                {PRINCIPLES.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 md:p-5 transition-colors hover:bg-white/[0.05]"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-foreground font-semibold text-base md:text-lg">{item.title}</h3>
+                        <p className="text-sm md:text-base text-muted-foreground mt-1">{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right Image/Visual */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-[2.5rem] transform rotate-3 scale-105 blur-2xl opacity-60"></div>
               <div className="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-black/5 aspect-[4/5] md:aspect-square lg:aspect-[4/5]">
-                <img 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Team collaborating on system architecture" 
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Team collaborating on system architecture"
                   className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                
+
                 <div className="absolute bottom-8 left-8 right-8">
                   <blockquote className="text-white text-xl font-light italic leading-relaxed">
                     "We build the systems that power the future of Ethiopian enterprise."
@@ -62,11 +132,14 @@ const WhoWeAre: React.FC = () => {
                     </div>
                   </div>
                 </div>
+
+                <div className="absolute top-6 right-6 rounded-full border border-white/20 bg-black/30 backdrop-blur-md px-4 py-2 text-xs font-semibold tracking-wide text-white">
+                  Mission-Critical Delivery
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Stats Section */}
           <div className="mt-20 rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-sm p-8 md:p-12 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
@@ -82,10 +155,11 @@ const WhoWeAre: React.FC = () => {
   );
 };
 
-const StatItem = ({ number, suffix, label }: { number: number, suffix: string, label: string }) => {
+const StatItem = ({ number, suffix, label }: { number: number; suffix: string; label: string }) => {
   const [count, setCount] = React.useState(0);
   const [isVisible, setIsVisible] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
+  const frameRef = React.useRef<number | null>(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,42 +187,33 @@ const StatItem = ({ number, suffix, label }: { number: number, suffix: string, l
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
-      
-      // Easing function for smooth counting
       const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
-      
+
       setCount(Math.floor(easeOutQuart(progress) * number));
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        frameRef.current = requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animate);
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
   }, [isVisible, number]);
 
   return (
     <div ref={ref} className="flex flex-col items-center text-center">
       <h4 className="text-4xl md:text-5xl font-bold text-primary mb-2 tabular-nums tracking-tight">
-        {count}{suffix}
+        {count}
+        {suffix}
       </h4>
-      <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground">
-        {label}
-      </p>
+      <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-muted-foreground">{label}</p>
     </div>
   );
-};
-
-const IconSelector = ({ name }: { name: string }) => {
-  switch(name) {
-    case 'architecture': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>;
-    case 'users': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>;
-    case 'vision': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>;
-    case 'award': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>;
-    case 'server': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-14 0h14" /></svg>;
-    case 'globe': return <svg className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>;
-    default: return null;
-  }
 };
 
 export default WhoWeAre;

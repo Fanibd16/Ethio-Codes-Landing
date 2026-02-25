@@ -29,7 +29,8 @@ import {
 import { BlogPost, Lead, Service, Feature, Testimonial, PricingPlan } from './lib/types';
 
 const App: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [themeMode, setThemeMode] = useState<'light' | 'dark' | 'system'>('light');
+  const [systemPrefersDark, setSystemPrefersDark] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'post' | 'services' | 'admin'>('home');
   const [selectedPostSlug, setSelectedPostSlug] = useState<string | null>(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -67,14 +68,24 @@ const App: React.FC = () => {
   ]);
 
   useEffect(() => {
-    if (isDarkMode) {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const listener = (e: MediaQueryListEvent) => setSystemPrefersDark(e.matches);
+    setSystemPrefersDark(media.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, []);
+
+  useEffect(() => {
+    const applied = themeMode === 'system' ? (systemPrefersDark ? 'dark' : 'light') : themeMode;
+    if (applied === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [isDarkMode]);
+  }, [themeMode, systemPrefersDark]);
 
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const cycleTheme = () =>
+    setThemeMode((prev) => (prev === 'light' ? 'dark' : prev === 'dark' ? 'system' : 'light'));
 
   const handlePostSelect = (slug: string) => {
     setSelectedPostSlug(slug);
@@ -158,14 +169,17 @@ const App: React.FC = () => {
           pricingPlans={pricingPlans}
           setPricingPlans={setPricingPlans}
           onExit={() => setCurrentView('home')}
-          isDarkMode={isDarkMode}
-          toggleTheme={toggleTheme}
+          isDarkMode={themeMode === 'system' ? systemPrefersDark : themeMode === 'dark'}
+          toggleTheme={cycleTheme}
         />
       ) : (
         <>
           <Navbar 
             onNavClick={handleNavigation}
             onBookAudit={() => setIsBookingModalOpen(true)}
+            themeMode={themeMode}
+            onThemeChange={setThemeMode}
+            systemPrefersDark={systemPrefersDark}
           />
           
           <main>
@@ -202,8 +216,8 @@ const App: React.FC = () => {
 
           <Footer 
             onAdminClick={() => handleNavigation('/admin')} 
-            toggleTheme={toggleTheme}
-            isDarkMode={isDarkMode}
+            toggleTheme={cycleTheme}
+            isDarkMode={themeMode === 'system' ? systemPrefersDark : themeMode === 'dark'}
           />
           <ScrollToTop />
           

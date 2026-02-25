@@ -10,7 +10,7 @@ const CTA: React.FC<CTAProps> = ({ onBookAudit }) => {
   return (
     <section id="contact" className="py-32 px-4 relative overflow-hidden bg-background transition-colors duration-300">
       <div className="container mx-auto">
-        <div className="relative overflow-hidden rounded-[3rem] bg-[#0a0a0a] dark:bg-primary border border-white/5 dark:border-primary/20 px-8 py-24 md:px-20 text-center transition-all duration-500 shadow-2xl max-w-6xl mx-auto">
+        <div className="relative overflow-hidden rounded-[3rem] bg-[#0a0a0a] dark:bg-primary border border-white/5 dark:border-primary/20 px-8 py-24 md:px-20 text-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-2xl max-w-6xl mx-auto hover:shadow-primary/30 hover:shadow-2xl">
           {/* Subtle light/dark spotlight effect */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 dark:bg-black/10 blur-[120px] pointer-events-none"></div>
           
@@ -24,10 +24,14 @@ const CTA: React.FC<CTAProps> = ({ onBookAudit }) => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Button 
                 size="lg" 
-                className="rounded-full w-full sm:w-auto h-16 px-12 text-xl font-bold bg-primary dark:bg-black dark:text-white hover:opacity-90 transition-transform hover:scale-105 active:scale-95 border-none shadow-2xl shadow-primary/20 dark:shadow-black/20"
+                className="relative overflow-hidden group rounded-full w-full sm:w-auto h-16 px-12 text-xl font-bold bg-primary dark:bg-black dark:text-white transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 active:scale-95 border-none shadow-2xl shadow-primary/20 dark:shadow-black/20"
                 onClick={onBookAudit}
               >
-                Schedule Your Strategy Call
+                <span className="absolute inset-0 bg-white translate-x-[-120%] group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                <span className="absolute inset-0 bg-white/20 blur-2xl opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+                <span className="relative z-10 transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-black">
+                  Schedule Your Strategy Call
+                </span>
               </Button>
             </div>
             <p className="mt-8 text-sm text-muted-foreground dark:text-black/60 italic">

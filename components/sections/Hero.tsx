@@ -43,7 +43,7 @@ const Hero: React.FC<HeroProps> = ({ onNavClick, onBookAudit }) => {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative pt-40 pb-20 md:pt-56 md:pb-24 overflow-hidden flex flex-col items-center text-center group transition-colors duration-500"
+      className="relative pt-40 pb-20 md:pt-46 md:pb-24 overflow-hidden flex flex-col items-center text-center group transition-colors duration-500"
     >
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 opacity-40 dark:opacity-20">
@@ -59,13 +59,16 @@ const Hero: React.FC<HeroProps> = ({ onNavClick, onBookAudit }) => {
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col items-center">
-          <div className="mb-6">
-            <Badge variant="outline" className="px-4 py-1.5 border-primary/20 text-primary bg-primary/5 rounded-full text-xs font-semibold tracking-wide uppercase animate-reveal opacity-0" style={{ animationDelay: '0s' }}>
-              Ethiopia's Premier System Builder
-            </Badge>
+          
+             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-2 py-1 text-xs font-semibold text-primary mb-4">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Ethiopia's Premier System Builder
           </div>
           
-          <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-8 leading-[1.1] text-foreground flex flex-wrap justify-center items-center">
+          <h1 className="text-4xl md:text-5xl lg:text-[90px] font-bold tracking-tight mb-6 leading-[0.85] text-foreground flex flex-wrap justify-center items-center">
             <span className="w-full flex justify-center flex-wrap">
               {line1.map((word, i) => (
                 <span key={`l1-${i}`} className="inline-block mr-[0.2em] animate-reveal opacity-0" style={{ animationDelay: `${(i + 1) * 0.1}s` }}>
@@ -89,16 +92,16 @@ const Hero: React.FC<HeroProps> = ({ onNavClick, onBookAudit }) => {
             </span>
           </h1>
           
-          <p className="text-lg md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed opacity-0 animate-reveal font-light" style={{ animationDelay: '1.2s' }}>
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl leading-relaxed opacity-0 animate-reveal font-light" style={{ animationDelay: '1.2s' }}>
             We engineer mission-critical digital infrastructure for Government, Enterprise, and Growth-focused Startups. 
-            <span className="block mt-2 font-medium text-foreground/90">One vendor. One system. Zero headaches.</span>
+            <span className="block mt-1 font-semibold text-foreground/90">One vendor. One system. Zero headaches.</span>
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto opacity-0 animate-reveal" style={{ animationDelay: '1.4s' }}>
-            <Button size="lg" className="rounded-full w-full sm:w-auto px-10 h-16 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-primary/20" onClick={onBookAudit}>
+            <Button size="lg" className="rounded-full w-full sm:w-auto px-10 h-14 text-lg font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-primary/20" onClick={onBookAudit}>
               Get Your System Audit
             </Button>
-            <Button variant="outline" size="lg" className="rounded-full w-full sm:w-auto px-10 h-16 text-lg font-semibold border-foreground/10 hover:bg-foreground/5 backdrop-blur-sm transition-all hover:scale-105 active:scale-95" onClick={() => onNavClick?.('#contact')}>
+            <Button variant="outline" size="lg" className="rounded-full w-full sm:w-auto px-10 h-14 text-lg font-semibold border-foreground/10 hover:bg-foreground/5 backdrop-blur-sm transition-all hover:scale-105 active:scale-95" onClick={() => onNavClick?.('#contact')}>
               Contact Us
             </Button>
           </div>
